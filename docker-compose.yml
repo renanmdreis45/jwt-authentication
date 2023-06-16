@@ -1,16 +1,20 @@
 services:
   postgres:
-    container_name: jwt_auth
-    image: jwt_auth
+    build:
+      context:
+      dockerfile: postgres.dockerfile
+    image: "jwt-auth"
+    container_name: ${PG_CONTAINER_NAME}
     environment:
-      - POSTGRES_USER=auth
-      - POSTGRES_PASSWORD = jwt123
-      - POSTGRES_DB = jwt_auth
-    ports:
-      - 6500:5432
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: ${PGDATA}
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
-  
-  volumes:
-    postgres_data:
-      
+      - dbtuto:/data/postgres-tuto
+    ports:
+      -"5432:5432"
+    restart: unless-stopped
+volumes:
+    dbtuto:
+      external: true
