@@ -1,26 +1,17 @@
+version: '4.12'
+
 services:
-  postgres:
-    image: postgres:12
+  db-postgres-jwt_auth:
+    image: postgres:alpine
+    ports: 
+      - "5435:5432"
+    container_name: "db-postgres-jwt_auth"
+    restart: always
+    volumes:
+      - ./database-jwt_auth:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: jwt_auth
       POSTGRES_USER: renan
       POSTGRES_PASSWORD: renan123
-      PGDATA: /data/postgres_jwt
-    volumes:
-      - data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    restart: unless-stopped
-
-  pg-admin:
-    image: dpage/pgadmin4:6
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@email.com
-      - PGADMIN_DEFAULT_PASSWORD=postgres_jwt
-      - PGADMIN_LISTEN_PORT = 5050
-    ports:
-      - "5050:5050"
 
 volumes:
-    data:
-      external: true
+    db-postgres-jwt_auth:
