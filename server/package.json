@@ -19,6 +19,6 @@
   },
   "devDependencies": {
     "cli": "^1.0.1",
-    "prisma": "^4.16.0"
+    "prisma": "^4.16.1"
   }
 }
