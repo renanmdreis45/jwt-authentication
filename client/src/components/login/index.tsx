@@ -1,23 +1,21 @@
-import React, { SyntheticEvent, useState } from 'react'
+import React, {useState, useEffect, SyntheticEvent} from 'react'
 import Image from 'next/image';
 import SignUp from '../../../public/assets/images/SignUp.png'
-
 import {
      Container, LoginImage, LoginFields, HeaderLogin, 
      LoginButtons, DivSeparators, SeparatorLeft, SeparatorRight, 
      FormLogin, EmailField, PasswordField, PasswordFooter, FooterLogin
 } from './styles';
-import { Google, Facebook } from './icons';
+import { Google, Facebook } from '../icons';
+import Router from 'next/router';
+import Register from '../cadastro/register';
 
-
-interface CadastroProps {
-    handleShowLogin: () => void;
+interface LoginProps {
+    handleShowCadastro: () => void;
 }
 
-export default function Cadastro({handleShowLogin}: CadastroProps) {
-
-
-
+export default function Login({handleShowCadastro}: LoginProps) {
+    
     return (
         <Container>
             <LoginImage>
@@ -25,8 +23,8 @@ export default function Cadastro({handleShowLogin}: CadastroProps) {
             </LoginImage>
             <LoginFields>
                     <HeaderLogin>
-                        <h1>Get`s started</h1>
-                        <h3>Already have an account? <a onClick={handleShowLogin}>Sign Up</a></h3>
+                        <h1>Let`s Start</h1>
+                        <h3>Didn`t have an account? <a onClick={handleShowCadastro}>Sign Up</a></h3>
                         <LoginButtons>
                             <button className="btn-google">
                                 <Image src={Google} alt="Logo Google" width={20} height={20} />
@@ -44,12 +42,14 @@ export default function Cadastro({handleShowLogin}: CadastroProps) {
                         <SeparatorRight/>
                     </DivSeparators>
                     <FormLogin onSubmit={}>
+                        <p>{}</p>
                         <EmailField>
                             <label>
                                 <span>Email address</span>
                                 <input type="text" placeholder='Enter your email address' onChange={}/>
                             </label>
                         </EmailField>
+                        <p>{}</p>
                         <PasswordField>
                             <label>
                                 <span>Password</span>
