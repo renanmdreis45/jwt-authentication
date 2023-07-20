@@ -1,7 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
 import { Action, UserState} from "../types/interfaces";
 
-const initialState = {
+export interface InitialState {
+    userInfo?: any;
+    auth?: any
+}
+
+const initialState: InitialState= {
     userInfo: localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo') as string)
     : null,
@@ -11,7 +16,7 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setCredentials: (state, action) => {
+          setCredentials: (state, action) => {
             state.userInfo = action.payload;
             localStorage.setItem('userInfo', JSON.stringify(action.payload));   
         }, 

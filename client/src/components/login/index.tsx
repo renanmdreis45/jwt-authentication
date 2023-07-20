@@ -9,13 +9,44 @@ import {
 import { Google, Facebook } from '../icons';
 import Router from 'next/router';
 import Register from '../cadastro/register';
+import { useLoginMutation } from '../../slices/usersApiSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setCredentials } from '../../slices/authSlice';
+import { toast } from 'react-toastify';
+import { InitialState } from '../../slices/authSlice';
 
-interface LoginProps {
-    handleShowCadastro: () => void;
-}
+export default function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-export default function Login({handleShowCadastro}: LoginProps) {
-    
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate();
+
+    const [login, {isLoading}] = useLoginMutation();
+
+    const { userInfo } = useSelector((state: InitialState) => state.auth);
+
+    useEffect(() => {
+        if(userInfo) {
+            navigate('/');
+        }
+    }, [navigate, userInfo]);
+
+    const submitHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+
+        try {
+            const res = await login({email, password}).unwrap();
+
+            dispatch(setCredentials({...res}));
+            navigate('/');
+        } catch (err: any) {
+            toast.error(err?.data?.message || err.error);
+        }
+    }
+ 
     return (
         <Container>
             <LoginImage>
@@ -24,7 +55,7 @@ export default function Login({handleShowCadastro}: LoginProps) {
             <LoginFields>
                     <HeaderLogin>
                         <h1>Let`s Start</h1>
-                        <h3>Didn`t have an account? <a onClick={handleShowCadastro}>Sign Up</a></h3>
+                        <h3>Didn`t have an account? <a>Sign Up</a></h3>
                         <LoginButtons>
                             <button className="btn-google">
                                 <Image src={Google} alt="Logo Google" width={20} height={20} />
