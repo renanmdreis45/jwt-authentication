@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Register from "../cadastro/register";
+import Register from "../register/register";
 import Login from "../login";
 
 export default function Enter() {

@@ -8,7 +8,10 @@ import {
      FormLogin, EmailField, PasswordField, PasswordFooter, FooterLogin
 } from './styles';
 import { Google, Facebook } from '../icons';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useRegisterMutation } from '../../slices/usersApiSlice';
+import { InitialState } from '../../slices/authSlice';
 
 interface CadastroProps {
     handleShowLogin: () => void;
@@ -16,7 +19,17 @@ interface CadastroProps {
 
 export default function Register({handleShowLogin}: CadastroProps) {
 
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassowrd, setConfirmPassword] = useState('');
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [register, {isLoading}] = useRegisterMutation();
+
+    const {userInfo} = useSelector((state: InitialState) => state.auth)
 
     return (
         <Container>
