@@ -6,7 +6,7 @@ import {
      LoginButtons, DivSeparators, SeparatorLeft, SeparatorRight, 
      FormLogin, EmailField, PasswordField, PasswordFooter, FooterLogin
 } from './styles';
-import { Google, Facebook } from '../icons';
+import { Google, Facebook } from '../../components/icons';
 import Router from 'next/router';
 import Register from '../register/register';
 import { useLoginMutation } from '../../slices/usersApiSlice';

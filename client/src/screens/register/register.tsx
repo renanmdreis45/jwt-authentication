@@ -7,7 +7,7 @@ import {
      LoginButtons, DivSeparators, SeparatorLeft, SeparatorRight, 
      FormLogin, EmailField, PasswordField, PasswordFooter, FooterLogin
 } from './styles';
-import { Google, Facebook } from '../icons';
+import { Google, Facebook } from '../../components/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from '../../slices/usersApiSlice';
