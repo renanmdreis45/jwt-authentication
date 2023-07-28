@@ -22,8 +22,8 @@ export const ProfileScreen = () => {
     })
 
     return (
-        <Form.Container>
-            
-        </Form.Container>
+        <FormContainer>
+            <h1> Update Profile </h1>
+        </FormContainer>
     )
 }
